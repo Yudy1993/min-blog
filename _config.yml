@@ -1,0 +1,7 @@
+title: Min Blog
+description: Simpel GitHub Pages blog
+theme: minima
+
+# (Valgfrit) Udfyld hvis repoet IKKE er et brugersite:
+# baseurl: "/min-blog"   # stien = reponavnet
+# url: "https://DIT-BRUGERNAVN.github.io"
