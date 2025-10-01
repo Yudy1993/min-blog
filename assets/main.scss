@@ -95,7 +95,7 @@ a:hover { color: #fff; }
 
 .post-box-title {
   margin: 0 0 14px 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #e5e7eb;
 }
 
@@ -180,7 +180,7 @@ body:not(.home) .post-header {
 
 /* Post title size (post page only) */
 body:not(.home) .post-title {
-  font-size: clamp(1.4rem, 2.4vw + 1rem, 2rem);  /* ~22–32px responsive */
+  font-size: clamp(1.2rem, 2.4vw + 1rem, 2rem);  /* ~22–32px responsive */
   line-height: 1.1;
   margin-top: 10px;
   margin-bottom: 6px;
