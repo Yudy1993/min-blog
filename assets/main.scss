@@ -1,42 +1,59 @@
 ---
-# Jekyll skal have front matter for at compile SCSS -> /assets/main.css
+# Jekyll compile'r SCSS til /assets/main.css
 ---
 
 @import "minima";
 
-/* ===== GLOBAL ===== */
+/* =========================
+   GLOBAL BAGGRUND & TEKST
+   ========================= */
 html, body { min-height: 100%; }
 
 body {
-  background-color: #0f172a;
+  background-color: #0f172a; /* fallback */
   background-image: url("{{ '/assets/img/background.png' | relative_url }}");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: #fff;
+  color: #fff; /* hvid tekst udenfor “papir” */
 }
 
-.site-header, .site-footer { background: transparent; border-color: rgba(255,255,255,.2); }
-.site-title, .site-title:visited, .site-nav .page-link, .site-footer, .footer-heading { color: #fff; }
-a { color: #93c5fd; } a:hover { color: #fff; }
+/* header/footer ovenpå mørk baggrund */
+.site-header, .site-footer {
+  background: transparent;
+  border-color: rgba(255,255,255,.2);
+}
+.site-title, .site-title:visited,
+.site-nav .page-link,
+.site-footer, .footer-heading { color: #fff; }
 
-/* Nulstil evt. gamle gennemsigtighedsregler */
+/* links på mørk baggrund */
+a { color: #93c5fd; }
+a:hover { color: #fff; }
+
+/* Nulstil gamle “gennemsigtig alt”-regler hvis de findes */
 .site, .page, .post, .wrapper, .page-content { background: initial; }
 
-/* ===== LAYOUT ===== */
+/* =========================
+   SIDE-INDHOLD / CENTRERING
+   ========================= */
+
+/* Brug Minima’s wrapper – ingen flex */
 .page-content { padding: 24px 0; }
 
-/* A4 papir KUN ikke-forside */
+/* ---------- A4 “papir” (kun IKKE-forsiden) ---------- */
 body:not(.home) .page-content > .wrapper {
   width: 100%;
   max-width: 210mm;
-  background: #1f2937;
-  color: #e5e7eb;
+  background: #1f2937;   /* skift til #fff for hvidt papir */
+  color: #e5e7eb;        /* skift til #111 ved hvidt papir */
   padding: 24mm 18mm;
   border-radius: 12px;
   box-shadow: 0 12px 36px rgba(0,0,0,.35);
 }
+
+/* indhold på “papiret” arver farve */
 body:not(.home) .post,
 body:not(.home) .post-content,
 body:not(.home) .post-title,
@@ -44,7 +61,7 @@ body:not(.home) .post-meta { color: inherit; }
 body:not(.home) .post-link { color: #93c5fd; }
 body:not(.home) .post-link:hover { color: #fff; }
 
-/* Print */
+/* Print-venlig */
 @media print {
   body { background: #fff !important; color: #111 !important; }
   .site-header, .site-footer { border-color: #e5e7eb; }
@@ -58,144 +75,23 @@ body:not(.home) .post-link:hover { color: #fff; }
   }
 }
 
-/* ===== FORSIDE (kort) ===== */
+/* =========================
+   FORSIDE: 2 BOKSE + KORT
+   ========================= */
+
+/* Én centralt placeret wrapper på forsiden */
 .home .page-content > .wrapper {
   max-width: 1100px;
   margin: 0 auto;
   background: transparent !important;
   color: #fff;
-  padding: 0;
+  padding: 0;            /* spacing styres af boksene */
   box-shadow: none;
   border-radius: 0;
-}
-
-.home .home-header {
-  margin: 18px 0 12px 0;
-  padding: 22px 24px;
-  background: rgba(15,23,42,.6);
-  border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-}
-
-/* Grid */
-.home .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 18px;
-  margin: 16px 0 28px 0;
-}
-
-/* Kort */
-.home .card {
-  background: #0b1220;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.home .card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,.35); }
-.home .card-link { display: block; color: inherit; text-decoration: none; }
-
-/* Billede (kvadrat) */
-.home .card-image {
-  aspect-ratio: 1 / 1;
-  background-size: cover;
-  background-position: center;
-  background-color: #0a0a0a;
-}
-
-/* Tekst i kort */
-.home .card-body { padding: 12px 14px 14px; background: #162033; }
-.home .card-title { margin: 0 0 6px; font-size: 1.05rem; color: #f3f4f6; }
-.home .card-meta { font-size: .85rem; color: #9ca3af; }
-
-/* Mobil */
-@media (max-width: 700px) {
-  .home .home-header { padding: 16px 18px; }
-}
-
-
-/* ==== Ekstra sektion med små post-bokse ==== */
-.home .mini-feed {
-  margin: 20px 0 36px;
-  padding: 18px 20px;
-  background: rgba(15,23,42,.6);       /* matcher din header-boks */
-  border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-}
-
-.home .mini-feed-title {
-  margin: 0 0 14px 0;
-  font-size: 1.2rem;
-  color: #e5e7eb;
-}
-
-.home .mini-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 14px;
-}
-
-/* Lille post-boks */
-.home .mini-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: #0b1220;
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  box-shadow: 0 6px 16px rgba(0,0,0,.25);
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-}
-.home .mini-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0,0,0,.3);
-  background: #121a2a;
-}
-
-/* Thumbnail (kvadratisk) */
-.home .mini-thumb {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 10px;
-  background: #0a0a0a;
-}
-
-/* Tekst i mini-kort */
-.home .mini-meta { display: grid; gap: 4px; }
-.home .mini-title {
-  margin: 0;
-  font-size: .98rem;
-  line-height: 1.25;
-  color: #f3f4f6;
-}
-.home .mini-date {
-  font-size: .8rem;
-  color: #9ca3af;
-}
-
-/* Mobil: en smule mere luft */
-@media (max-width: 700px) {
-  .home .mini-feed { padding: 14px 16px; }
-  .home .mini-thumb { width: 56px; height: 56px; }
-}
-
-/* --- Forside: to bokse --- */
-.home .page-content > .wrapper {
-  max-width: 1100px;
-  margin: 0 auto;
-  background: transparent !important;
-  padding: 0;
-  box-shadow: none;
-  border-radius: 0;
-  color: #fff;
 }
 
 /* Boks 1: Intro */
-.home .intro-box {
+.intro-box {
   margin: 18px 0 14px 0;
   padding: 22px 24px;
   background: rgba(15,23,42,.82);
@@ -204,59 +100,62 @@ body:not(.home) .post-link:hover { color: #fff; }
 }
 
 /* Boks 2: Posts */
-.home .post-box {
+.post-box {
   margin: 14px 0 30px 0;
   padding: 18px 20px;
   background: rgba(15,23,42,.82);
   border-radius: 16px;
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
 }
-.home .post-box-title {
+.post-box-title {
   margin: 0 0 14px 0;
   font-size: 1.25rem;
   color: #e5e7eb;
 }
 
 /* Grid med små post-kort */
-.home .post-cards {
+.post-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
 }
 
-/* Selve kortet */
-.home .post-card {
+/* Kort */
+.post-card {
   background: #0b1220;
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(0,0,0,.25);
   overflow: hidden;
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.home .post-card:hover {
+.post-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 14px 28px rgba(0,0,0,.32);
   background: #121a2a;
 }
-
-/* Klikbart indhold */
-.home .post-card-link { display: block; color: inherit; text-decoration: none; padding-bottom: 10px; }
+.post-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 10px;
+}
 
 /* Kvadratisk thumbnail */
-.home .post-thumb {
+.post-thumb {
   aspect-ratio: 1 / 1;
   background-size: cover;
   background-position: center;
   background-color: #0a0a0a; /* fallback */
 }
 
-/* Titel + dato under billedet */
-.home .post-title {
+/* Titel + dato */
+.post-title {
   margin: 10px 12px 4px 12px;
   font-size: 1.0rem;
   line-height: 1.25;
   color: #f3f4f6;
 }
-.home .post-date {
+.post-date {
   display: block;
   margin: 0 12px;
   font-size: .85rem;
@@ -265,7 +164,6 @@ body:not(.home) .post-link:hover { color: #fff; }
 
 /* Mobiljustering */
 @media (max-width: 700px) {
-  .home .intro-box { padding: 16px 18px; }
-  .home .post-box  { padding: 14px 16px; }
+  .intro-box { padding: 16px 18px; }
+  .post-box  { padding: 14px 16px; }
 }
-
