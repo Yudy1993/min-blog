@@ -5,6 +5,21 @@
 @import "minima";
 
 /* =========================
+   VARIABLES (single source of truth)
+   ========================= */
+:root {
+  --page-width: 330mm;                 /* overall max width (front + posts + header/footer) */
+  --gutter: 24px;                      /* side padding for header/footer & boxes */
+  --post-gutter: 24px;                 /* inner left/right edge for post pages */
+
+  /* Box look (front-page boxes + inner content boxes in posts) */
+  --box-bg: rgba(15,23,42,.97);
+  --box-radius: 8px;
+  --box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  --box-pad: 18px 24px;
+}
+
+/* =========================
    GLOBAL BAGGRUND & TEKST
    ========================= */
 html, body { min-height: 100%; }
@@ -20,32 +35,25 @@ body {
 }
 
 /* header/footer ovenpå mørk baggrund */
-.site-header, .site-footer {
-  background: transparent;
-  /* border-color: rgba(255,255,255,.2);  <- slå til hvis du vil have lys kant */
-}
-.site-title, .site-title:visited,
-.site-nav .page-link,
-.site-footer, .footer-heading { color: #fff; }
+.site-header, .site-footer { background: transparent; }
+.site-title, .site-title:visited, .site-nav .page-link, .site-footer, .footer-heading { color: #fff; }
 
 /* links på mørk baggrund */
 a { color: #93c5fd; }
 a:hover { color: #fff; }
 
-/* Nulstil gamle “gennemsigtig alt”-regler hvis de findes */
+/* Nulstil evt. gamle gennemsigtighedsregler */
 .site, .page, .post, .wrapper, .page-content { background: initial; }
 
 /* =========================
-   SIDE-INDHOLD / CENTRERING
+   LAYOUT / CENTRERING
    ========================= */
-
-/* Brug Minima’s wrapper – ingen flex */
 .page-content { padding: 24px 0; }
 
-/* ---------- FORSIDE: én wrapper, samme bredde som indlæg ---------- */
+/* Center main wrapper and keep consistent width */
 .page-content > .wrapper {
   width: 100%;
-  max-width: 330mm;      /* samme som indlæg */
+  max-width: var(--page-width);
   margin: 0 auto;
   background: transparent !important;
   color: #fff;
@@ -54,39 +62,36 @@ a:hover { color: #fff; }
   border-radius: 0;
 }
 
+/* Match header/footer to same width & gutter */
+.site-header .wrapper,
+.site-footer .wrapper {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  box-sizing: border-box;
+}
+
 /* =========================
-   FORSIDE: 2 BOKSE + KORT
+   FORSIDE: 2 BOKSE + POST-KORT
    ========================= */
 
-/* Boks 1: Intro */
-.intro-box {
+/* Bokse */
+.intro-box,
+.post-box {
   margin: 0 0 14px 0;
   width: 100%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 
-  box-sizing: border-box;          /* NEW */
-  padding: 18px 24px;
-  background: rgba(15,23,42,.97);  /* FIXED: added alpha */
-  border-radius: 8px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  box-sizing: border-box;
+  padding: var(--box-pad);
+  background: var(--box-bg);
+  border-radius: var(--box-radius);
+  box-shadow: var(--box-shadow);
 }
-
-/* Boks 2: Posts */
-.post-box {
-  margin: 14px 0 30px 0;
-  width: 100%;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-
-  box-sizing: border-box;          /* NEW */
-  padding: 18px 24px;
-  background: rgba(15,23,42,.97);  /* FIXED: added alpha */
-  border-radius: 8px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-}
+.post-box { margin: 14px 0 30px 0; }
 
 .post-box-title {
   margin: 0 0 14px 0;
@@ -129,8 +134,24 @@ a:hover { color: #fff; }
   background-color: #0a0a0a; /* fallback */
 }
 
+/* Front page card text (scoped, doesn't touch post page) */
+.post-box .post-card .post-title {
+  margin: 10px 12px 4px 12px;
+  font-size: .85rem;
+  line-height: 1.25;
+  color: #f3f4f6;
+}
+.post-box .post-card .post-date {
+  margin: 0 12px 8px 12px;
+  font-size: .85rem;
+  color: #9ca3af;
+}
 
-/* Indhold arver farven */
+/* =========================
+   POST-SIDER (ikke-forside)
+   ========================= */
+
+/* Farver/links */
 body:not(.home) .post,
 body:not(.home) .post-content,
 body:not(.home) .post-title,
@@ -138,41 +159,34 @@ body:not(.home) .post-meta { color: #e5e7eb; }
 body:not(.home) .post a { color: #93c5fd; }
 body:not(.home) .post a:hover { color: #fff; }
 
-/* En “forside-boks” rundt om indholdet på indlægssider */
+/* Wrapper-boks omkring indholdet */
 body:not(.home) article.post {
-  background: rgba(15,23,42,.97);     /* samme farve som forsiden */
-  border-radius: 8px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  background: var(--box-bg);
+  border-radius: var(--box-radius);
+  box-shadow: var(--box-shadow);
+  padding: 22px var(--post-gutter);   /* all sides; left/right from var */
+  box-sizing: border-box;
 }
 
-/* lidt luft mellem header og indhold i boksen */
 body:not(.home) .post-header { margin-bottom: 14px; }
 
-.site-header .wrapper,
-.site-footer .wrapper {
-  max-width: 330mm;     /* match .page-content > .wrapper */
-  margin: 0 auto;       /* center */
-  padding-left: 24px;   /* same inset as your boxes */
-  padding-right: 24px;
-  box-sizing: border-box; /* so padding doesn't widen it */
-}
-
-/* === Post-only spacing: align everything to the same left/right edge === */
-
-/* 1) One knob to control the inner edge on posts */
-:root { --post-gutter: 24px; }  /* adjust this to move all post text in/out */
-
-/* 3) Remove the extra side margin on title/date/header */
+/* Fjern vandrette afvigelser så alt flugter */
+body:not(.home) .post-title,
+body:not(.home) .post-meta,
 body:not(.home) .post-header {
   margin-left: 0;
   margin-right: 0;
 }
 
-/* Keep vertical rhythm; no horizontal offset */
-body:not(.home) .post-title { margin-top: 10px; margin-bottom: 4px; }
-body:not(.home) .post-meta  { margin-top: 0;    margin-bottom: 12px; }
+/* Post title size (post page only) */
+body:not(.home) .post-title {
+  font-size: clamp(1.4rem, 2.4vw + 1rem, 2rem);  /* ~22–32px responsive */
+  line-height: 1.1;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
 
-/* 4) Make all direct children inside the post body respect the same edge */
+/* Brødtekst-børn skal ikke “stikke ud” */
 body:not(.home) .post-content > * {
   margin-left: 0;
   margin-right: 0;
@@ -180,20 +194,19 @@ body:not(.home) .post-content > * {
   box-sizing: border-box;
 }
 
-/* Lists & quotes: small indent but no extra outer offset */
+/* Lister/citater – lille indryk men ikke ekstra offset */
 body:not(.home) .post-content ul,
 body:not(.home) .post-content ol {
   margin-left: 0;
-  padding-left: 1.25rem;   /* tweak if you want tighter lists */
+  padding-left: 1.25rem;
 }
-
 body:not(.home) .post-content blockquote {
   margin-left: 0;
   margin-right: 0;
   border-left-color: rgba(255,255,255,.2);
 }
 
-/* Media blocks should fill the text column */
+/* Media fylder tekstkolonnen */
 body:not(.home) .post-content img,
 body:not(.home) .post-content pre,
 body:not(.home) .post-content table,
@@ -205,143 +218,18 @@ body:not(.home) .post-content figure {
   margin-right: 0;
 }
 
-/* Post pages: remove side indent on title and date */
-body:not(.home) .post-title,
-body:not(.home) .post-meta {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-/* (optional) keep your inner edge consistent with the box */
-/* Post page wrapper box */
-body:not(.home) article.post {
-  background: rgba(15,23,42,.97);
-  border-radius: 8px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  padding: 22px 24px;       /* <-- padding on all sides */
-  box-sizing: border-box;
-}
-
-/* --- FRONT PAGE CARD TEXT INDENT (doesn't touch post pages) --- */
-.post-box .post-card .post-title {
-  margin: 10px 12px 4px 12px;
-  font-size: .85rem;/* indent title inside each card */
-  line-height: 1.25;
-  color: #f3f4f6;
-}
-
-.post-box .post-card .post-date {
-  margin: 0 12px 8px 12px;      /* indent date inside each card */
-  font-size: .85rem;
-  color: #9ca3af;
-}
-
-/* Post pages: control the H1 title size and spacing */
-body:not(.home) .post-title {
-  font-size: clamp(1.4rem, 2.4vw + 1rem, 2rem);  /* ~22–32px responsive */
-  line-height: 1.1;
-  margin-top: 10px;
-  margin-bottom: 6px;
-}
-
-/* Optional: slightly smaller on very small phones */
-@media (max-width: 400px) {
-  body:not(.home) .post-title {
-    font-size: 1.35rem;
-  }
-}
-
-/* === Post-only content boxes (inside the article body) === */
-:root { --box-radius: 8px; --box-shadow: 0 10px 24px rgba(0,0,0,.25); --box-bg: rgba(15,23,42,.97); --box-pad: 18px 24px; }
-
+/* === Indre bokse inde i post-indhold (ikke forsiden) === */
 body:not(.home) .post-content .content-box {
   background: var(--box-bg);
   border-radius: var(--box-radius);
   box-shadow: var(--box-shadow);
   padding: var(--box-pad);
-  margin: 16px 0;               /* space around the box */
+  margin: 16px 0;
   box-sizing: border-box;
 }
-
-/* inside the box: tidy spacing */
-body:not(.home) .post-content .content-box > :first-child { margin-top: 0; }
-body:not(.home) .post-content .content-box > :last-child  { margin-bottom: 0; }
-
-/* optional variants */
-body:not(.home) .post-content .content-box--tight   { padding: 12px 16px; }
-body:not(.home) .post-content .content-box--spacious{ padding: 24px 28px; }
-
-/* images/tables/code fill the box neatly */
-body:not(.home) .post-content .content-box img,
-body:not(.home) .post-content .content-box table,
-body:not(.home) .post-content .content-box pre {
-  max-width: 100%;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* optional header style inside a box */
-body:not(.home) .post-content .content-box h2,
-body:not(.home) .post-content .content-box h3 {
-  margin-top: 0.25rem;
-}
-
-/* Boxes inside post content only (won't affect front page) */
-:root {
-  --box-bg: rgba(15,23,42,.97);
-  --box-radius: 8px;
-  --box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  --box-pad: 18px 24px;
-}
-
-body:not(.home) .post-content .content-box {
-  background: var(--box-bg);
-  border-radius: var(--box-radius);
-  box-shadow: var(--box-shadow);
-  padding: var(--box-pad);   /* <-- padding for inner boxes */
-  margin: 16px 0;            /* space around the box */
-  box-sizing: border-box;
-}
-
-/* tidy inner spacing */
-body:not(.home) .post-content .content-box > :first-child { margin-top: 0; }
-body:not(.home) .post-content .content-box > :last-child  { margin-bottom: 0; }
-
-/* optional size variants */
+/* Tættere/luftigere varianter */
 body:not(.home) .post-content .content-box--tight    { padding: 12px 16px; }
 body:not(.home) .post-content .content-box--spacious { padding: 24px 28px; }
-
-/* media should fill the box neatly */
-body:not(.home) .post-content .content-box img,
-body:not(.home) .post-content .content-box table,
-body:not(.home) .post-content .content-box pre {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* =========================
-   PRINT
-   ========================= */
-@media print {
-  body { background: #fff !important; color: #111 !important; }
-  .site-header, .site-footer { border-color: #e5e7eb; }
-  body:not(.home) .page-content > .wrapper {
-    box-shadow: none;
-    border-radius: 0;
-    max-width: 330mm;
-    padding: 20mm 15mm;
-    background: #fff !important;
-    color: #111 !important;
-  }
-}
-
-
-/* =========================
-   MOBILJUSTERING
-   ========================= */
-@media (max-width: 700px) {
-  .intro-box { padding: 16px 18px; }
-  .post-box  { padding: 14px 16px; }
-}
-
+/* Ryd top/bund-margin i første/sidste element */
+body:not(.home) .post-content .content-box > :first-child { margin-top: 0; }
+body:no
