@@ -163,6 +163,24 @@ body:not(.home) .post-link:hover { color: #fff; }
   color: #9ca3af;
 }
 
+/* === SIDSTE I FILEN: indlægssider samme farve som bokse === */
+body:not(.home) .page-content > .wrapper {
+  background: rgba(15,23,42);
+  color: #e5e7eb;
+  padding: 24mm 18mm;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+
+body:not(.home) .post,
+body:not(.home) .post-content,
+body:not(.home) .post-title,
+body:not(.home) .post-meta {
+  color: #e5e7eb;
+}
+body:not(.home) .post a { color: #93c5fd; }
+body:not(.home) .post a:hover { color: #fff; }
+
 /* Mobiljustering */
 @media (max-width: 700px) {
   .intro-box { padding: 16px 18px; }
