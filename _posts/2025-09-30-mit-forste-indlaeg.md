@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mit første indlæg"
-image: /assets/img/posts/mit-forste.png
+image: /assets/img/posts/mit-første.png
 ---
 
 DIN TEKST HER
