@@ -22,7 +22,7 @@ body {
 /* header/footer ovenpå mørk baggrund */
 .site-header, .site-footer {
   background: transparent;
-  //border-color: rgba(255,255,255,.2);
+  /* border-color: rgba(255,255,255,.2);  <- slå til hvis du vil have lys kant */
 }
 .site-title, .site-title:visited,
 .site-nav .page-link,
@@ -42,47 +42,10 @@ a:hover { color: #fff; }
 /* Brug Minima’s wrapper – ingen flex */
 .page-content { padding: 24px 0; }
 
-/* ---------- A4 “papir” (kun IKKE-forsiden) ---------- */
-body:not(.home) .page-content > .wrapper {
-  width: 100%;
-  max-width: 210mm;
-  //background:  rgba(15,23,42);   /* skift til #fff for hvidt papir */
-  color: #e5e7eb;        /* skift til #111 ved hvidt papir */
-  padding: 24mm 18mm;
-  border-radius: 12px;
-  //box-shadow: 0 12px 36px rgba(0,0,0,.35);
-}
-
-/* indhold på “papiret” arver farve */
-body:not(.home) .post,
-body:not(.home) .post-content,
-body:not(.home) .post-title,
-body:not(.home) .post-meta { color: inherit; }
-body:not(.home) .post-link { color: #93c5fd; }
-body:not(.home) .post-link:hover { color: #fff; }
-
-/* Print-venlig */
-@media print {
-  body { background: #fff !important; color: #111 !important; }
-  .site-header, .site-footer { border-color: #e5e7eb; }
-  body:not(.home) .page-content > .wrapper {
-    box-shadow: none;
-    border-radius: 0;
-    max-width: 210mm;
-    padding: 20mm 15mm;
-    background: #fff !important;
-    color: #111 !important;
-  }
-}
-
-/* =========================
-   FORSIDE: 2 BOKSE + KORT
-   ========================= */
-
-/* Én centralt placeret wrapper på forsiden */
+/* ---------- FORSIDE: én wrapper, samme bredde som indlæg ---------- */
 .home .page-content > .wrapper {
   width: 100%;
-  max-width: 210mm; 
+  max-width: 210mm;      /* samme som indlæg */
   margin: 0 auto;
   background: transparent !important;
   color: #fff;
@@ -91,11 +54,15 @@ body:not(.home) .post-link:hover { color: #fff; }
   border-radius: 0;
 }
 
+/* =========================
+   FORSIDE: 2 BOKSE + KORT
+   ========================= */
+
 /* Boks 1: Intro */
 .intro-box {
-  margin: 0px 0 14px 0;
+  margin: 0 0 14px 0;
   padding: 22px 24px;
-  background: rgba(15,23,42);
+  background: rgba(15,23,42,.82);
   border-radius: 16px;
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
 }
@@ -104,7 +71,7 @@ body:not(.home) .post-link:hover { color: #fff; }
 .post-box {
   margin: 14px 0 30px 0;
   padding: 18px 20px;
-  background: rgba(15,23,42);
+  background: rgba(15,23,42,.82);
   border-radius: 16px;
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
 }
@@ -163,25 +130,48 @@ body:not(.home) .post-link:hover { color: #fff; }
   color: #9ca3af;
 }
 
-/* === SIDSTE I FILEN: indlægssider samme farve som bokse === */
+/* =========================
+   IKKE-FORSIDER: “A4” PAPIR
+   ========================= */
+
+/* ÉN samlet A4-regel (behold kun denne) */
 body:not(.home) .page-content > .wrapper {
-  background: rgba(15,23,42);
+  width: 100%;
+  max-width: 210mm;
+  background: rgba(15,23,42,.82);  /* samme farvefeel som boksene */
   color: #e5e7eb;
   padding: 24mm 18mm;
   border-radius: 16px;
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
 }
 
+/* Indhold arver farven */
 body:not(.home) .post,
 body:not(.home) .post-content,
 body:not(.home) .post-title,
-body:not(.home) .post-meta {
-  color: #e5e7eb;
-}
+body:not(.home) .post-meta { color: #e5e7eb; }
 body:not(.home) .post a { color: #93c5fd; }
 body:not(.home) .post a:hover { color: #fff; }
 
-/* Mobiljustering */
+/* =========================
+   PRINT
+   ========================= */
+@media print {
+  body { background: #fff !important; color: #111 !important; }
+  .site-header, .site-footer { border-color: #e5e7eb; }
+  body:not(.home) .page-content > .wrapper {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 210mm;
+    padding: 20mm 15mm;
+    background: #fff !important;
+    color: #111 !important;
+  }
+}
+
+/* =========================
+   MOBILJUSTERING
+   ========================= */
 @media (max-width: 700px) {
   .intro-box { padding: 16px 18px; }
   .post-box  { padding: 14px 16px; }
