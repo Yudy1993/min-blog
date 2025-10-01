@@ -237,6 +237,21 @@ body:not(.home) article.post { padding-left: 24px; padding-right: 24px; }
   color: #9ca3af;
 }
 
+/* Post pages: control the H1 title size and spacing */
+body:not(.home) .post-title {
+  font-size: clamp(1.4rem, 2.4vw + 1rem, 2rem);  /* ~22–32px responsive */
+  line-height: 1.2;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+/* Optional: slightly smaller on very small phones */
+@media (max-width: 400px) {
+  body:not(.home) .post-title {
+    font-size: 1.35rem;
+  }
+}
+
 
 /* =========================
    PRINT
