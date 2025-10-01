@@ -170,6 +170,63 @@ body:not(.home) .post-header { margin-bottom: 14px; }
   padding-right: 24px;
   box-sizing: border-box; /* so padding doesn't widen it */
 }
+
+/* === Post-only spacing: align everything to the same left/right edge === */
+
+/* 1) One knob to control the inner edge on posts */
+:root { --post-gutter: 24px; }  /* adjust this to move all post text in/out */
+
+/* 2) Post container padding uses the gutter */
+body:not(.home) article.post {
+  padding-left: var(--post-gutter);
+  padding-right: var(--post-gutter);
+}
+
+/* 3) Remove the extra side margin on title/date/header */
+body:not(.home) .post-title,
+body:not(.home) .post-meta,
+body:not(.home) .post-header {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Keep vertical rhythm; no horizontal offset */
+body:not(.home) .post-title { margin-top: 10px; margin-bottom: 4px; }
+body:not(.home) .post-meta  { margin-top: 0;    margin-bottom: 12px; }
+
+/* 4) Make all direct children inside the post body respect the same edge */
+body:not(.home) .post-content > * {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Lists & quotes: small indent but no extra outer offset */
+body:not(.home) .post-content ul,
+body:not(.home) .post-content ol {
+  margin-left: 0;
+  padding-left: 1.25rem;   /* tweak if you want tighter lists */
+}
+
+body:not(.home) .post-content blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  border-left-color: rgba(255,255,255,.2);
+}
+
+/* Media blocks should fill the text column */
+body:not(.home) .post-content img,
+body:not(.home) .post-content pre,
+body:not(.home) .post-content table,
+body:not(.home) .post-content figure {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* =========================
    PRINT
    ========================= */
