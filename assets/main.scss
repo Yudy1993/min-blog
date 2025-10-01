@@ -94,7 +94,6 @@ a:hover { color: #fff; }
 .post-box { margin: 14px 0 30px 0; }
 
 .post-box-title {
-  font-size: 1.25rem;
   margin: 0 0 14px 0;
   font-size: 1.2rem;
   color: #e5e7eb;
@@ -135,16 +134,18 @@ a:hover { color: #fff; }
   background-color: #0a0a0a; /* fallback */
 }
 
-/* Front page card text (scoped, doesn't touch post page) */
-.post-box .post-card .post-title {
-  margin: 10px 12px 4px 12px;
-  font-size: 1.2rem;
+/* Front page card titles */
+.home .post-box .post-card h3.post-title {
+  font-size: 1.25rem;   /* ≈ 18px; use 1.2rem for ~19.2px */
   line-height: 1.25;
+  margin: 10px 12px 4px 12px; /* keep your indent */
   color: #f3f4f6;
 }
-.post-box .post-card .post-date {
+
+/* Card date under title */
+.home .post-box .post-card .post-date {
+  font-size: 0.95rem;    /* bump if you want (was .85rem) */
   margin: 0 12px 8px 12px;
-  font-size: .85rem;
   color: #9ca3af;
 }
 
