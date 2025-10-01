@@ -7,6 +7,7 @@ layout: default
   {{ content }}
 </header>
 
+<!-- Sektion 1: dine eksisterende kort -->
 <section class="cards">
   {% for post in site.posts %}
   <article class="card">
@@ -21,4 +22,20 @@ layout: default
     </a>
   </article>
   {% endfor %}
+</section>
+
+<!-- Sektion 2: ekstra boks med små post-bokse -->
+<section class="mini-feed">
+  <h2 class="mini-feed-title">Seneste indlæg</h2>
+  <div class="mini-cards">
+    {% for post in site.posts limit: 8 %}
+    <a class="mini-card" href="{{ post.url | relative_url }}">
+      <img class="mini-thumb" src="{{ post.image | default: '/assets/img/background.png' | relative_url }}" alt="{{ post.title }}">
+      <div class="mini-meta">
+        <h3 class="mini-title">{{ post.title }}</h3>
+        {% if post.date %}<time class="mini-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>{% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </section>
