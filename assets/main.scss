@@ -177,3 +177,66 @@ body::before {
   pointer-events: none;
 }
 */
+
+/* Centrer alt sideindhold */
+.page-content {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  flex: 1;
+}
+
+/* A4-“papir” KUN på ikke-forsiden (forhindrer dobbelt bokse på forsiden) */
+body:not(.home) .page-content > .wrapper {
+  width: 100%;
+  max-width: 210mm;
+  background: #1f2937;   /* eller #fff */
+  color: #e5e7eb;        /* eller #111 ved hvidt papir */
+  padding: 24mm 18mm;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.35);
+}
+
+/* Forsiden: én wrapper uden papir-baggrund, så kort-griddet står midt på siden */
+.home .page-content > .wrapper {
+  width: 100%;
+  max-width: 1100px;     /* bredde til grid */
+  margin: 0 auto;
+  background: transparent !important;
+  color: #fff;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Header-kortet øverst på forsiden */
+.home .home-header {
+  margin: 18px 0 12px 0;
+  padding: 22px 24px;
+  background: rgba(15,23,42,.6);
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+
+/* Post-kort grid */
+.home .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  margin: 16px 0 28px 0;
+}
+
+/* Post-kort */
+.home .card {
+  background: #0b1220;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.home .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0,0,0,.35);
+}
+.home .card-link { display:block; color:inherit; text-decorati
+
