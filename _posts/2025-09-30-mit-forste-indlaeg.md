@@ -1,6 +1,6 @@
 ---
 layout: post
-title:"Algorithms - The best way to trade"
+title: "Algorithms - The best way to trade"
 image: /assets/img/posts/mit-første.png
 ---
 
