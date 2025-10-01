@@ -169,12 +169,6 @@ body:not(.home) .post-header { margin-bottom: 14px; }
 /* 1) One knob to control the inner edge on posts */
 :root { --post-gutter: 24px; }  /* adjust this to move all post text in/out */
 
-/* 2) Post container padding uses the gutter */
-body:not(.home) article.post {
-  padding-left: var(--post-gutter);
-  padding-right: var(--post-gutter);
-}
-
 /* 3) Remove the extra side margin on title/date/header */
 body:not(.home) .post-title,
 body:not(.home) .post-meta,
@@ -230,6 +224,19 @@ body:not(.home) .post-meta {
 /* (optional) keep your inner edge consistent with the box */
 body:not(.home) article.post { padding-left: 24px; padding-right: 24px; }
 
+/* --- FRONT PAGE CARD TEXT INDENT (doesn't touch post pages) --- */
+.post-box .post-card .post-title {
+  margin: 10px 12px 4px 12px;   /* indent title inside each card */
+  line-height: 1.25;
+  color: #f3f4f6;
+}
+
+.post-box .post-card .post-date {
+  margin: 0 12px 8px 12px;      /* indent date inside each card */
+  font-size: .85rem;
+  color: #9ca3af;
+}
+
 
 /* =========================
    PRINT
@@ -240,7 +247,7 @@ body:not(.home) article.post { padding-left: 24px; padding-right: 24px; }
   body:not(.home) .page-content > .wrapper {
     box-shadow: none;
     border-radius: 0;
-    max-width: 210mm;
+    max-width: 330mm;
     padding: 20mm 15mm;
     background: #fff !important;
     color: #111 !important;
