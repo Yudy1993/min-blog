@@ -113,3 +113,72 @@ body:not(.home) .post-link:hover { color: #fff; }
 @media (max-width: 700px) {
   .home .home-header { padding: 16px 18px; }
 }
+
+
+/* ==== Ekstra sektion med små post-bokse ==== */
+.home .mini-feed {
+  margin: 20px 0 36px;
+  padding: 18px 20px;
+  background: rgba(15,23,42,.6);       /* matcher din header-boks */
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+
+.home .mini-feed-title {
+  margin: 0 0 14px 0;
+  font-size: 1.2rem;
+  color: #e5e7eb;
+}
+
+.home .mini-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+/* Lille post-boks */
+.home .mini-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #0b1220;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.home .mini-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.3);
+  background: #121a2a;
+}
+
+/* Thumbnail (kvadratisk) */
+.home .mini-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #0a0a0a;
+}
+
+/* Tekst i mini-kort */
+.home .mini-meta { display: grid; gap: 4px; }
+.home .mini-title {
+  margin: 0;
+  font-size: .98rem;
+  line-height: 1.25;
+  color: #f3f4f6;
+}
+.home .mini-date {
+  font-size: .8rem;
+  color: #9ca3af;
+}
+
+/* Mobil: en smule mere luft */
+@media (max-width: 700px) {
+  .home .mini-feed { padding: 14px 16px; }
+  .home .mini-thumb { width: 56px; height: 56px; }
+}
