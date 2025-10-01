@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Velkommen
+title: Your first step towards freedom
 ---
 
-Hej 👋 Velkommen til min blog. Herunder finder du seneste indlæg.
+Welcome to blog, this is were the blueprint and other gems hides to give you the tools to become a trader.
