@@ -196,3 +196,11 @@ body:not(.home) .post-content .content-box > :last-child  { margin-bottom: 0; }
 @media (max-width: 700px) {
   .home .post-list { padding: 14px 16px; }
 }
+
+/* OVERRIDES — nederst i main.scss */
+.home .post-list li > h3 > a.post-link {
+  font-size: 0.85rem;   /* justér efter smag */
+  line-height: 1.25;
+  font-weight: 500;     /* valgfrit */
+  text-decoration: none;
+}
