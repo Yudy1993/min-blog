@@ -12,7 +12,7 @@ layout: default
   <article class="card">
     <a class="card-link" href="{{ post.url | relative_url }}">
       <div class="card-image"
-           style="background-image:url('{{ (post.image | default: '/assets/img/background.png') | relative_url }}');">
+           style="background-image:url('{{ post.image | default: '/assets/img/background.png' | relative_url }}');">
       </div>
       <div class="card-body">
         <h2 class="card-title">{{ post.title }}</h2>
