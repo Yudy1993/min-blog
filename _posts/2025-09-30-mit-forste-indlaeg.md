@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mit første indlæg"
+title: "Algorithms - The Best Way To Trade"
 image: /assets/img/posts/mit-første.png
 ---
 
