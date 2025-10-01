@@ -186,6 +186,27 @@ body:not(.home) .post-header { margin-bottom: 14px; }
   }
 }
 
+/* tighten the left/right edge of post pages */
+body:not(.home) article.post {
+  padding-left: 16px;   /* was 22/24px in your file */
+  padding-right: 16px;
+}
+
+/* remove extra horizontal margin on the title/date block */
+body:not(.home) .post-title,
+body:not(.home) .post-header,
+body:not(.home) .post-meta {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ensure the body content aligns with the same edge */
+body:not(.home) .post-content > * {
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+}
+
 /* =========================
    MOBILJUSTERING
    ========================= */
@@ -193,3 +214,4 @@ body:not(.home) .post-header { margin-bottom: 14px; }
   .intro-box { padding: 16px 18px; }
   .post-box  { padding: 14px 16px; }
 }
+
