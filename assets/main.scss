@@ -232,4 +232,36 @@ body:not(.home) .post-content .content-box--tight    { padding: 12px 16px; }
 body:not(.home) .post-content .content-box--spacious { padding: 24px 28px; }
 /* Ryd top/bund-margin i første/sidste element */
 body:not(.home) .post-content .content-box > :first-child { margin-top: 0; }
-body:no
+body:not(.home) .post-content .content-box > :last-child  { margin-bottom: 0; }
+/* Media inde i boksen fylder pænt */
+body:not(.home) .post-content .content-box img,
+body:not(.home) .post-content .content-box table,
+body:not(.home) .post-content .content-box pre {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================
+   PRINT
+   ========================= */
+@media print {
+  body { background: #fff !important; color: #111 !important; }
+  .site-header, .site-footer { border-color: #e5e7eb; }
+  body:not(.home) .page-content > .wrapper {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: var(--page-width);   /* keep print width in sync */
+    padding: 20mm 15mm;
+    background: #fff !important;
+    color: #111 !important;
+  }
+}
+
+/* =========================
+   MOBIL
+   ========================= */
+@media (max-width: 700px) {
+  .intro-box { padding: 16px 18px; }
+  .post-box  { padding: 14px 16px; }
+}
