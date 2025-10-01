@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 ---
 
 <!-- Boks 1: Intro -->
@@ -16,13 +16,11 @@ layout: home
     <article class="post-card">
       <a class="post-card-link" href="{{ post.url | relative_url }}">
         <div class="post-thumb"
-             style="background-image:url('{{ post.image | default: '/assets/img/mit-første.png' | relative_url }}');">
+             style="background-image:url('{{ post.image | default: '/assets/img/background.png' | relative_url }}');">
         </div>
         <h3 class="post-title">{{ post.title }}</h3>
         {% if post.date %}
-          <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
-            {{ post.date | date: "%-d %b %Y" }}
-          </time>
+          <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>
         {% endif %}
       </a>
     </article>
