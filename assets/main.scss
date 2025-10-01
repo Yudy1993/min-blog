@@ -1,26 +1,8 @@
 ---
 # Jekyll compile'r SCSS til /assets/main.css
 ---
-//test
+
 @import "minima";
-
-/* =========================
-   VARIABLES
-   ========================= */
-:root {
-  --page-width: 330mm;
-  --gutter: 24px;
-  --post-gutter: 24px;
-
-  --box-bg: rgba(15,23,42,.97);
-  --box-radius: 8px;
-  --box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  --box-pad: 18px 24px;
-
-  /* Front-side typografi */
-  --front-title-size: 0.9rem;   /* mindsk her */
-  --front-meta-size: 0.85rem;
-}
 
 /* =========================
    GLOBAL BAGGRUND & TEKST
@@ -28,95 +10,140 @@
 html, body { min-height: 100%; }
 
 body {
-  background-color: #0f172a;
+  background-color: #0f172a; /* fallback */
   background-image: url("{{ '/assets/img/background.png' | relative_url }}");
-  background-position: center; background-size: cover;
-  background-repeat: no-repeat; background-attachment: fixed;
-  color: #fff;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff; /* hvid tekst udenfor “papir” */
 }
 
 /* header/footer ovenpå mørk baggrund */
-.site-header, .site-footer { background: transparent; }
-.site-title, .site-title:visited, .site-nav .page-link, .site-footer, .footer-heading { color: #fff; }
+.site-header, .site-footer {
+  background: transparent;
+  /* border-color: rgba(255,255,255,.2);  <- slå til hvis du vil have lys kant */
+}
+.site-title, .site-title:visited,
+.site-nav .page-link,
+.site-footer, .footer-heading { color: #fff; }
 
 /* links på mørk baggrund */
 a { color: #93c5fd; }
 a:hover { color: #fff; }
 
-/* Nulstil temaernes “papir”-baggrunde */
+/* Nulstil gamle “gennemsigtig alt”-regler hvis de findes */
 .site, .page, .post, .wrapper, .page-content { background: initial; }
 
 /* =========================
-   LAYOUT / CENTRERING
+   SIDE-INDHOLD / CENTRERING
    ========================= */
+
+/* Brug Minima’s wrapper – ingen flex */
 .page-content { padding: 24px 0; }
 
+/* ---------- FORSIDE: én wrapper, samme bredde som indlæg ---------- */
 .page-content > .wrapper {
   width: 100%;
-  max-width: var(--page-width);
+  max-width: 330mm;      /* samme som indlæg */
   margin: 0 auto;
+  background: transparent !important;
   color: #fff;
-  padding: 0;
+  padding: 0;            /* spacing styres af boksene */
   box-shadow: none;
   border-radius: 0;
 }
 
-.site-header .wrapper,
-.site-footer .wrapper {
-  max-width: var(--page-width);
-  margin: 0 auto;
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
-  box-sizing: border-box;
-}
-
 /* =========================
-   FORSIDE (Minima's post-liste som "boks")
+   FORSIDE: 2 BOKSE + KORT
    ========================= */
 
-/* Lav selve UL.post-list til en boks */
-.home .post-list {
-  list-style: none;
-  margin: 0 0 30px 0;
-  padding: var(--box-pad);
-  background: var(--box-bg);
-  border-radius: var(--box-radius);
-  box-shadow: var(--box-shadow);
+/* Boks 1: Intro */
+.intro-box {
+  margin: 0 0 14px 0;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
   box-sizing: border-box;
+  padding: 18px 24px;
+  background: rgba(15,23,42,.97);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
 }
 
-/* Mindre titel/link */
-.home .post-list .post-link,
-.home .post-list h3,
-.home .post-list h3 .post-link {
-  font-size: 0.85rem !important;
-  line-height: 1.25; /* valgfrit: gør den mere kompakt */ 
-  color: #f3f4f6;
+/* Boks 2: Posts */
+.post-box {
+  margin: 14px 0 30px 0;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  box-sizing: border-box;
+  padding: 18px 24px;
+  background: rgba(15,23,42,.97);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+
+.post-box-title {
+  margin: 0 0 14px 0;
+  font-size: 1.25rem;
+  color: #e5e7eb;
+}
+
+/* Grid med små post-kort */
+.post-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Kort */
+.post-card {
+  background: #0b1220;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.32);
+  background: #121a2a;
+}
+.post-card-link {
+  display: block;
+  color: inherit;
   text-decoration: none;
+  padding-bottom: 10px;
 }
 
-/* Post-meta (dato m.m.) */
-.home .post-list .post-meta,
-.home .post-list time {
-  font-size: var(--front-meta-size);
+/* Kvadratisk thumbnail */
+.post-thumb {
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  background-color: #0a0a0a; /* fallback */
+}
+
+/* Titel + dato */
+.post-title {
+  margin: 10px 12px 4px 12px;
+  font-size: 1.0rem;
+  line-height: 1.25;
+  color: #f3f4f6;
+}
+.post-date {
+  display: block;
+  margin: 0 12px;
+  font-size: .85rem;
   color: #9ca3af;
 }
 
-/* Afstand mellem items (Minima har <li>) */
-.home .post-list > li {
-  margin: 0 0 10px 0;
-  padding: 0;
-  border: 0;
-}
-
-/* Hover-effekt på links */
-.home .post-list .post-link:hover {
-  color: #fff;
-}
-
-/* =========================
-   POST-SIDER (ikke-forside)
-   ========================= */
+/* Indhold arver farven */
 body:not(.home) .post,
 body:not(.home) .post-content,
 body:not(.home) .post-title,
@@ -124,57 +151,26 @@ body:not(.home) .post-meta { color: #e5e7eb; }
 body:not(.home) .post a { color: #93c5fd; }
 body:not(.home) .post a:hover { color: #fff; }
 
+/* En “forside-boks” rundt om indholdet på indlægssider */
 body:not(.home) article.post {
-  background: var(--box-bg);
-  border-radius: var(--box-radius);
-  box-shadow: var(--box-shadow);
-  padding: 22px var(--post-gutter);
-  box-sizing: border-box;
+  background: rgba(15,23,42,.97);     /* samme farve som forsiden */
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  padding: 22px 24px;
 }
 
+/* lidt luft mellem header og indhold i boksen */
 body:not(.home) .post-header { margin-bottom: 14px; }
 
-body:not(.home) .post-title,
-body:not(.home) .post-meta,
-body:not(.home) .post-header {
-  margin-left: 0; margin-right: 0;
+/* Header/footer bredde & indryk matcher indholdet */
+.site-header .wrapper,
+.site-footer .wrapper {
+  max-width: 330mm;     /* match .page-content > .wrapper */
+  margin: 0 auto;       /* center */
+  padding-left: 24px;   /* same inset as your boxes */
+  padding-right: 24px;
+  box-sizing: border-box; /* so padding doesn't widen it */
 }
-
-/* Post title size (post page only) */
-body:not(.home) .post-title,
-body:not(.home) h1.post-title {
-  font-size: clamp(1.125rem, 1vw + 0.75rem, 1.25rem);
-  line-height: 1.2;
-  margin-top: 10px;
-  margin-bottom: 6px;
-}
-
-/* Indholdsbredder */
-body:not(.home) .post-content > *,
-body:not(.home) .post-content img,
-body:not(.home) .post-content pre,
-body:not(.home) .post-content table,
-body:not(.home) .post-content figure {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  margin-left: 0; margin-right: 0;
-  box-sizing: border-box;
-}
-
-/* Indre bokse i posts */
-body:not(.home) .post-content .content-box {
-  background: var(--box-bg);
-  border-radius: var(--box-radius);
-  box-shadow: var(--box-shadow);
-  padding: var(--box-pad);
-  margin: 16px 5px 0 5px;
-  box-sizing: border-box;
-}
-body:not(.home) .post-content .content-box--tight    { padding: 12px 16px; }
-body:not(.home) .post-content .content-box--spacious { padding: 24px 28px; }
-body:not(.home) .post-content .content-box > :first-child { margin-top: 0; }
-body:not(.home) .post-content .content-box > :last-child  { margin-bottom: 0; }
 
 /* =========================
    PRINT
@@ -183,24 +179,19 @@ body:not(.home) .post-content .content-box > :last-child  { margin-bottom: 0; }
   body { background: #fff !important; color: #111 !important; }
   .site-header, .site-footer { border-color: #e5e7eb; }
   body:not(.home) .page-content > .wrapper {
-    box-shadow: none; border-radius: 0;
-    max-width: var(--page-width);
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 210mm;
     padding: 20mm 15mm;
-    background: #fff !important; color: #111 !important;
+    background: #fff !important;
+    color: #111 !important;
   }
 }
 
 /* =========================
-   MOBIL
+   MOBILJUSTERING
    ========================= */
 @media (max-width: 700px) {
-  .home .post-list { padding: 14px 16px; }
-}
-
-/* OVERRIDES — nederst i main.scss */
-.home .post-list li > h3 > a.post-link {
-  font-size: 0.85rem;   /* justér efter smag */
-  line-height: 1.25;
-  font-weight: 500;     /* valgfrit */
-  text-decoration: none;
+  .intro-box { padding: 16px 18px; }
+  .post-box  { padding: 14px 16px; }
 }
