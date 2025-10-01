@@ -15,7 +15,7 @@ body {
   /* Vælg én af de to muligheder nedenfor */
 
   /* (A) Baggrundsbillede: Omdøb dit filnavn til noget simpelt: /assets/img/hero.png */
-  background-image: url("{{ '/assets/img/hero.png' | relative_url }}");
+  background-image: url("{{ '/assets/img/background.png' | relative_url }}");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
