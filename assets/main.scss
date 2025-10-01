@@ -129,19 +129,12 @@ a:hover { color: #fff; }
   background-color: #0a0a0a; /* fallback */
 }
 
-/* Titel + dato */
-.post-title {
-  margin: 10px 14px 4px 14px;
-  font-size: 1.0rem;
-  line-height: 1.25;
-  color: #f3f4f6;
-}
-.post-date {
-  display: block;
-  margin: 0 14px 0px 14px;
-  font-size: .85rem;
-  color: #9ca3af;
-}
+
+
+/* Front-page cards only */
+.post-card .post-title { margin: 10px 12px 4px 12px; line-height: 1.25; color: #f3f4f6; }
+.post-card .post-date  { margin: 0 12px; font-size: .85rem; color: #9ca3af; }
+
 
 /* Indhold arver farven */
 body:not(.home) .post,
@@ -226,6 +219,17 @@ body:not(.home) .post-content figure {
   margin-left: 0;
   margin-right: 0;
 }
+
+/* Post pages: remove side indent on title and date */
+body:not(.home) .post-title,
+body:not(.home) .post-meta {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* (optional) keep your inner edge consistent with the box */
+body:not(.home) article.post { padding-left: 24px; padding-right: 24px; }
+
 
 /* =========================
    PRINT
