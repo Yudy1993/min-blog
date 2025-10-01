@@ -1,0 +1,12 @@
+/* Farve */
+body { background: #0f172a; }  /* mørk blågrå */
+
+/* Billede */
+body {
+  background: url("/assets/img/bg.jpg") center/cover no-repeat fixed;
+}
+
+/* Gradient */
+body {
+  background: linear-gradient(120deg, #0ea5e9, #8b5cf6);
+}
