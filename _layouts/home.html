@@ -2,40 +2,30 @@
 layout: default
 ---
 
-<header class="home-header">
+<!-- Boks 1: Intro -->
+<section class="intro-box">
   <h1 class="page-heading">{{ page.title | default: "Velkommen" }}</h1>
   {{ content }}
-</header>
-
-<!-- Sektion 1: dine eksisterende kort -->
-<section class="cards">
-  {% for post in site.posts %}
-  <article class="card">
-    <a class="card-link" href="{{ post.url | relative_url }}">
-      <div class="card-image"
-           style="background-image:url('{{ post.image | default: '/assets/img/background.png' | relative_url }}');">
-      </div>
-      <div class="card-body">
-        <h2 class="card-title">{{ post.title }}</h2>
-        {% if post.date %}<p class="card-meta">{{ post.date | date: "%-d %b %Y" }}</p>{% endif %}
-      </div>
-    </a>
-  </article>
-  {% endfor %}
 </section>
 
-<!-- Sektion 2: ekstra boks med små post-bokse -->
-<section class="mini-feed">
-  <h2 class="mini-feed-title">Seneste indlæg</h2>
-  <div class="mini-cards">
-    {% for post in site.posts limit: 8 %}
-    <a class="mini-card" href="{{ post.url | relative_url }}">
-      <img class="mini-thumb" src="{{ post.image | default: '/assets/img/background.png' | relative_url }}" alt="{{ post.title }}">
-      <div class="mini-meta">
-        <h3 class="mini-title">{{ post.title }}</h3>
-        {% if post.date %}<time class="mini-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>{% endif %}
-      </div>
-    </a>
+<!-- Boks 2: Posts som små kort -->
+<section class="post-box">
+  <h2 class="post-box-title">Posts</h2>
+  <div class="post-cards">
+    {% for post in site.posts %}
+    <article class="post-card">
+      <a class="post-card-link" href="{{ post.url | relative_url }}">
+        <div class="post-thumb"
+             style="background-image:url('{{ post.image | default: '/assets/img/background.png' | relative_url }}');">
+        </div>
+        <h3 class="post-title">{{ post.title }}</h3>
+        {% if post.date %}
+          <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%-d %b %Y" }}
+          </time>
+        {% endif %}
+      </a>
+    </article>
     {% endfor %}
   </div>
 </section>
