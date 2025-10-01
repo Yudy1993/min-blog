@@ -2,25 +2,27 @@
 layout: default
 ---
 
-<header class="home-header wrapper">
-  <h1 class="page-heading">{{ page.title | default: "Velkommen" }}</h1>
-  {{ content }}
-</header>
+<div class="wrapper">
+  <header class="home-header">
+    <h1 class="page-heading">{{ page.title | default: "Velkommen" }}</h1>
+    {{ content }}
+  </header>
 
-<section class="cards wrapper">
-  {% for post in site.posts %}
-  <article class="card">
-    <a class="card-link" href="{{ post.url | relative_url }}">
-      <div class="card-image"
-           style="background-image:url('{{ (post.image | default: '/assets/img/background.png') | relative_url }}');">
-      </div>
-      <div class="card-body">
-        <h2 class="card-title">{{ post.title }}</h2>
-        {% if post.date %}
-          <p class="card-meta">{{ post.date | date: "%-d %b %Y" }}</p>
-        {% endif %}
-      </div>
-    </a>
-  </article>
-  {% endfor %}
-</section>
+  <section class="cards">
+    {% for post in site.posts %}
+    <article class="card">
+      <a class="card-link" href="{{ post.url | relative_url }}">
+        <div class="card-image"
+             style="background-image:url('{{ (post.image | default: '/assets/img/background.png') | relative_url }}');">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">{{ post.title }}</h2>
+          {% if post.date %}
+            <p class="card-meta">{{ post.date | date: "%-d %b %Y" }}</p>
+          {% endif %}
+        </div>
+      </a>
+    </article>
+    {% endfor %}
+  </section>
+</div>
