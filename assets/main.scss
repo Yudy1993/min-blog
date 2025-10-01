@@ -4,28 +4,23 @@
 
 @import "minima";
 
-/* -------------------------
-   GLOBALT LAYOUT & BAGGRUND
-   ------------------------- */
+/* ============ GLOBAL BAGGRUND & TEKST ============ */
 
 html, body { min-height: 100%; }
 
 body {
-  /* Fallback-farve, hvis billede ikke kan loades */
+  /* mørk baggrund udenfor “papiret” */
   background-color: #0f172a;
-
-  /* Baggrundsbillede */
   background-image: url("{{ '/assets/img/background.png' | relative_url }}");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 
-  /* Hvid tekst "uden for papiret" */
-  color: #fff;
+  color: #fff; /* hvid tekst ovenpå baggrunden */
 }
 
-/* Header og footer i mørkt tema ovenpå baggrund */
+/* header/footer ovenpå mørk baggrund */
 .site-header, .site-footer {
   background: transparent;
   border-color: rgba(255,255,255,.2);
@@ -36,134 +31,149 @@ body {
   color: #fff;
 }
 
-/* Links i lys blå, der matcher mørk baggrund */
+/* linkfarver på mørk baggrund */
 a { color: #93c5fd; }
 a:hover { color: #fff; }
 
-/* Fjern AL tidligere "transparent alt-indhold" regler.
-   (Hvis du tidligere havde .site, .page-content, .wrapper { background: transparent !important; }
-    skal den slettes. Vi styrer det nedenfor på en kontrolleret måde.) */
+/* Nulstil evt. gamle regler der gjorde alt gennemsigtigt */
+.site, .page, .post, .wrapper, .page-content {
+  background: initial;
+}
 
+/* ============ LAYOUT FOR SIDEINDHOLD ============ */
 
-/* -------------------------
-   “A4 SIDE”-BLOK I MIDTEN
-   ------------------------- */
-
-/* Gør page-content til en flex scene der centrerer papiret */
+/* centrer indhold generelt */
 .page-content {
   display: flex;
   justify-content: center;
-  padding: 24px 0;       /* luft rundt om papiret */
-  flex: 1;               /* fyld højde så baggrunden ses */
+  padding: 24px 0;
+  flex: 1;
 }
 
-/* Brug Minima’s .wrapper som selve A4-arket */
-.page-content .wrapper {
-  /* A4 bredde: 210mm (behold responsive cap) */
+/* ------- A4-“papir” (kun IKKE-forside) ------- */
+body:not(.home) .page-content > .wrapper {
   width: 100%;
   max-width: 210mm;
-
-  /* “Papir”-look */
-  background: #1f2937;
-  color: #fff;
-  padding: 24mm 18mm;    /* mm giver pæn print-følelse */
+  /* vælg farve for papiret: mørkegrå som ønsket */
+  background: #1f2937;          /* skift til #fff for hvidt papir */
+  color: #e5e7eb;               /* lys tekst på mørkt papir */
+  padding: 24mm 18mm;
   border-radius: 12px;
   box-shadow: 0 12px 36px rgba(0,0,0,.35);
 }
 
-/* Sørg for at indhold inde i “papiret” er mørkt og læsbart */
-.post, .post-content, .post-title, .post-meta {
-  color: #fff;
+/* indhold på “papiret” */
+body:not(.home) .post,
+body:not(.home) .post-content,
+body:not(.home) .post-title,
+body:not(.home) .post-meta {
+  color: inherit;
 }
-.post-link { color: #1d4ed8; }
-.post-link:hover { color: #0b3ea8; }
+body:not(.home) .post-link { color: #93c5fd; }
+body:not(.home) .post-link:hover { color: #fff; }
 
-/* Lidt mindre padding på små skærme */
-@media (max-width: 700px) {
-  .page-content .wrapper { padding: 16mm 12mm; }
-}
-
-/* -------------------------
-   PRINT TILPASNING
-   ------------------------- */
+/* print-tilpasning */
 @media print {
-  /* Print uden stor baggrund */
   body {
     background: #fff !important;
     color: #111 !important;
   }
-  .site-header, .site-footer {
-    border-color: #e5e7eb;
-  }
-  .page-content .wrapper {
+  .site-header, .site-footer { border-color: #e5e7eb; }
+  body:not(.home) .page-content > .wrapper {
     box-shadow: none;
     border-radius: 0;
     max-width: 210mm;
     padding: 20mm 15mm;
+    background: #fff !important;
+    color: #111 !important;
   }
 }
 
+/* ============ FORSIDE (GRID MED KORT) ============ */
 
-/* Grid til kort */
-.cards {
+/* sørg for at forsiden IKKE får “papir-boksen”,
+   selvom der er flere .wrapper-elementer */
+.home .page-content > .wrapper {
+  width: 100%;
+  max-width: 1100px;     /* lidt bredere til kort-grid */
+  background: transparent !important;
+  color: #fff;
+  padding: 0;            /* spacing styres af header + grid */
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* forside-header (titel/intro) */
+.home .home-header {
+  margin: 18px 0 12px 0;
+  padding: 22px 24px;
+  background: rgba(15,23,42,.6);
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+
+/* grid med post-kort */
+.home .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 18px;
-  margin-top: 16px;
+  margin: 16px 0 28px 0;
 }
 
-/* Selve kortet */
-.card {
-  background: #111;                  /* mørk kortbaggrund (udenfor “A4”) */
+/* kort */
+.home .card {
+  background: #0b1220;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
   transition: transform .2s ease, box-shadow .2s ease;
 }
-.card:hover {
+.home .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(0,0,0,.35);
 }
-
-/* Klikbart område */
-.card-link {
+.home .card-link {
   display: block;
   color: inherit;
   text-decoration: none;
 }
 
-/* Kvadratisk billede-område */
-.card-image {
-  aspect-ratio: 1 / 1;               /* moderne browsere */
+/* kvadratisk billedfelt */
+.home .card-image {
+  aspect-ratio: 1 / 1;       /* moderne browsere */
   background-size: cover;
   background-position: center;
+  background-color: #0a0a0a; /* fallback hvis intet billede */
 }
 
-/* Hvis du vil støtte ældre browsere uden aspect-ratio:
-.card-image { position: relative; }
-.card-image::before { content: ""; display: block; padding-top: 100%; }
-.card-image { position: relative; }
-.card-image > img, .card-image > * { position:absolute; inset:0; } 
-*/
-
-/* Tekstområde */
-.card-body {
+/* tekstområde i kort */
+.home .card-body {
   padding: 12px 14px 14px;
-  background: #1f2937;               /* mørkegrå indre baggrund */
+  background: #162033;
 }
-
-/* Titel + meta */
-.card-title {
-  font-size: 1.1rem;
+.home .card-title {
+  font-size: 1.05rem;
   line-height: 1.25;
   margin: 0 0 6px 0;
-  color: #f3f4f6;                     /* lys titel */
+  color: #f3f4f6;
 }
-.card-meta {
+.home .card-meta {
   font-size: .85rem;
-  color: #9ca3af;                     /* svag dato */
+  color: #9ca3af;
 }
 
-/* Farver hvis du har “A4”-layout på resten:
-   (sørg for at kortene skiller sig ud på mørk baggrund) */
-.page-content { background: transparent; }
+/* mobil-tilpasning */
+@media (max-width: 700px) {
+  .home .home-header { padding: 16px 18px; }
+}
+
+/* ============ OPTIONAL: MØRKT OVERLAY PÅ BAGGRUND ============ */
+/*
+body::before {
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  pointer-events: none;
+}
+*/
