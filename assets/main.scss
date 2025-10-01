@@ -154,7 +154,7 @@ body:not(.home) .post a:hover { color: #fff; }
 /* En “forside-boks” rundt om indholdet på indlægssider */
 body:not(.home) article.post {
   background: rgba(15,23,42,.97);     /* samme farve som forsiden */
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
   padding: 22px 24px;
 }
