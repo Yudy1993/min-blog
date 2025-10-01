@@ -64,8 +64,8 @@ a:hover { color: #fff; }
   max-width: 210mm;
 
   /* “Papir”-look */
-  background: #fff;
-  color: #111;
+  background: #1f2937;
+  color: #fff;
   padding: 24mm 18mm;    /* mm giver pæn print-følelse */
   border-radius: 12px;
   box-shadow: 0 12px 36px rgba(0,0,0,.35);
@@ -73,7 +73,7 @@ a:hover { color: #fff; }
 
 /* Sørg for at indhold inde i “papiret” er mørkt og læsbart */
 .post, .post-content, .post-title, .post-meta {
-  color: #111;
+  color: #fff;
 }
 .post-link { color: #1d4ed8; }
 .post-link:hover { color: #0b3ea8; }
