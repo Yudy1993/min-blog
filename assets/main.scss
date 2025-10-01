@@ -180,8 +180,8 @@ body:not(.home) .post-header {
 
 /* Post title size (post page only) */
 body:not(.home) .post-title {
-  font-size: clamp(1.2rem, 2.4vw + 1rem, 2rem);  /* ~22–32px responsive */
-  line-height: 1.1;
+  font-size: clamp(1.125rem, 1vw + 0.75rem, 1.25rem); /* 18px up to ~20px max */
+  line-height: 1.2;
   margin-top: 10px;
   margin-bottom: 6px;
 }
