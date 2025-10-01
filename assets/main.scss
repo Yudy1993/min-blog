@@ -90,7 +90,7 @@ a:hover { color: #fff; }
 
 .post-box-title {
   margin: 0 0 14px 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #e5e7eb;
 }
 
@@ -239,7 +239,7 @@ body:not(.home) article.post {
 /* Post pages: control the H1 title size and spacing */
 body:not(.home) .post-title {
   font-size: clamp(1.4rem, 2.4vw + 1rem, 2rem);  /* ~22–32px responsive */
-  line-height: 1.2;
+  line-height: 1.1;
   margin-top: 10px;
   margin-bottom: 6px;
 }
