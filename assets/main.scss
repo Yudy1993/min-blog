@@ -121,12 +121,23 @@ a:hover { color: #fff; }
   padding-bottom: 10px;
 }
 
-/* Kvadratisk thumbnail */
 .post-thumb {
-  aspect-ratio: 1 / 1;
-  background-size: cover;
-  background-position: center;
-  background-color: #0a0a0a; /* fallback */
+  width: 100%;
+  aspect-ratio: 1 / 1;        /* square frame */
+  display: block;
+
+  background-size: contain;    /* <= fit inside the box */
+  background-position: center; /* center it */
+  background-repeat: no-repeat;
+  background-color: #0a0a0a;   /* letterbox behind transparent/empty areas */
+
+  /* Optional: make the visible image a bit smaller inside the square */
+  /* padding: 8px; */
+}
+
+/* Fallback for older browsers that don’t support aspect-ratio */
+@supports not (aspect-ratio: 1 / 1) {
+  .post-thumb { padding-top: 100%; } /* square via padding trick */
 }
 
 /* Titel + dato */
