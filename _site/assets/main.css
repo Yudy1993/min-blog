@@ -869,5 +869,26 @@ body:not(.home) .post-header {
     padding: 14px 16px;
   }
 }
+/* Post-page title only (won't touch front-page cards) */
+body:not(.home) .post-header > .post-title {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #f3f4f6;
+  /* alignment/position */
+  text-align: left; /* left | center | right */
+  margin: 8px 0 12px; /* auto centers when centered */
+  max-width: 42rem; /* optional when centered */
+}
+
+/* date line under title */
+body:not(.home) .post-header .post-meta {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  margin: 0 auto 10px;
+  text-align: inherit;
+}
 
 /*# sourceMappingURL=main.css.map */
